@@ -11,7 +11,7 @@ import os
 # Step 1 — Load and prepare the data
 # ---------------------------------------------------
 
-df = pd.read_csv('../input/PaidSearch.csv')
+df = pd.read_csv('input/PaidSearch.csv')
 
 df['date'] = pd.to_datetime(df['date'])
 df['log_revenue'] = np.log(df['revenue'])
@@ -61,11 +61,11 @@ untreated_pivot['log_revenue_diff'] = (
 )
 
 # Ensure temp directory exists
-os.makedirs('../temp', exist_ok=True)
+os.makedirs('temp', exist_ok=True)
 
 # Save pivot tables
-treated_pivot.to_csv('../temp/treated_pivot.csv')
-untreated_pivot.to_csv('../temp/untreated_pivot.csv')
+treated_pivot.to_csv('temp/treated_pivot.csv')
+untreated_pivot.to_csv('temp/untreated_pivot.csv')
 
 # ---------------------------------------------------
 # Step 3 — Print summary statistics
@@ -111,9 +111,9 @@ plt.ylabel('Revenue')
 plt.title('Figure 5.2: Average Revenue Over Time')
 plt.legend()
 
-os.makedirs('../output/figures', exist_ok=True)
+os.makedirs('output/figures', exist_ok=True)
 
-plt.savefig('../output/figures/figure_5_2.png')
+plt.savefig('output/figures/figure_5_2.png')
 plt.close()
 
 # ---------------------------------------------------
@@ -147,5 +147,5 @@ plt.xlabel('Date')
 plt.ylabel('log(rev_control) - log(rev_treat)')
 plt.title('Figure 5.3: Log Revenue Difference Over Time')
 
-plt.savefig('../output/figures/figure_5_3.png')
+plt.savefig('output/figures/figure_5_3.png')
 plt.close()
