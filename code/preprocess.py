@@ -122,7 +122,7 @@ plt.close()
 
 avg_log_rev = (
     df.groupby(['date', 'search_stays_on'])['log_revenue']
-    .sum()
+    .mean()
     .reset_index()
 )
 
@@ -132,19 +132,19 @@ pivot_log = avg_log_rev.pivot(
     values='log_revenue'
 )
 
-pivot_log['log_diff'] = (
+pivot_log['ratio'] = np.exp(
     pivot_log[1] - pivot_log[0]
 )
 
 plt.figure(figsize=(10, 6))
 
-plt.plot(pivot_log.index, pivot_log['log_diff'])
+plt.plot(pivot_log.index, pivot_log['ratio'])
 
 plt.axvline(pd.to_datetime('2012-05-22'),
             linestyle='--')
 
 plt.xlabel('Date')
-plt.ylabel('log(rev_control) - log(rev_treat)')
+plt.ylabel('Revenue Ratio (Treatment / Control)')
 plt.title('Figure 5.3: Log Revenue Difference Over Time')
 
 plt.savefig('output/figures/figure_5_3.png')
