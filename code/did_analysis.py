@@ -1,10 +1,3 @@
-# did_analysis.py
-# Computes the difference-in-differences estimate for the eBay paid search experiment.
-# Method: Compare pre-post log revenue changes between treatment and control DMAs.
-# Reference: Blake et al. (2014), Taddy Ch. 5
-#!/usr/bin/env python3
-# code/did_analysis.py
-# Difference-in-Differences estimation for eBay Paid Search experiment
 
 import pandas as pd
 import numpy as np
