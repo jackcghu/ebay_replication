@@ -52,7 +52,17 @@ print("=======================")
 print(f"Gamma hat: {gamma_hat:.4f}")
 print(f"Std Error: {se:.4f}")
 print(f"95% CI: [{ci_lower:.4f}, {ci_upper:.4f}]")
+gamma_hat
+se
+ci_lower
+ci_upper
+# ---------------------------------------------------
+# Exponentiated (levels) results
+# ---------------------------------------------------
 
+gamma_hat_exp = np.exp(gamma_hat)
+ci_lower_exp = np.exp(ci_lower)
+ci_upper_exp = np.exp(ci_upper)
 # ---------------------------------------------------
 # Step 4 — Output LaTeX table
 # ---------------------------------------------------
@@ -60,17 +70,25 @@ print(f"95% CI: [{ci_lower:.4f}, {ci_upper:.4f}]")
 latex = r"""\begin{table}[h]
 \centering
 \caption{Difference-in-Differences Estimate of the Effect of Paid Search on Revenue}
-\begin{tabular}{lc}
+\begin{tabular}{lcc}
 \hline
-& Log Scale \\
+& Log Scale & Levels (exp) \\
 \hline
-Point Estimate ($\hat{\gamma}$) & $%.4f$ \\
-Standard Error & $%.4f$ \\
-95\%% CI & $[%.4f, \; %.4f]$ \\
+Point Estimate ($\hat{\gamma}$) & $%.4f$ & $%.4f$ \\
+Standard Error & $%.4f$ & --- \\
+95\%% CI & $[%.4f, \; %.4f]$ & $[%.4f, \; %.4f]$ \\
 \hline
 \end{tabular}
 \label{tab:did}
-\end{table}""" % (gamma_hat, se, ci_lower, ci_upper)
+\end{table}""" % (
+    gamma_hat,
+    gamma_hat_exp,
+    se,
+    ci_lower,
+    ci_upper,
+    ci_lower_exp,
+    ci_upper_exp
+)
 
 with open('output/tables/did_table.tex', 'w') as f:
     f.write(latex)
